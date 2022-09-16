@@ -11,9 +11,11 @@ This is a preliminary root container for all (meta-)data.
   - Description: Unique identifier for the dataset
 - __name*__
   - Type: string
+  - Default: New dataset
   - Description: Descriptive name of the dataset
 - __date*__
   - Type: date
+  - Default_factory: datetime.now
   - Description: Date/time when the dataset was created
 - __authors*__
   - Type: Author
@@ -22,6 +24,7 @@ This is a preliminary root container for all (meta-)data.
 - __subjects*__
   - Type: string
   - Multiple: True
+  - Default: Chemistry
   - Description: Research subjects covered by the datset
 - __keywords*__
   - Type: string
@@ -29,6 +32,7 @@ This is a preliminary root container for all (meta-)data.
   - Description: Descriptive keywords to describe the dataset
 - __license*__
   - Type: string
+  - Default: MIT
   - Description: License for the dataset
 - __samples*__
   - Type: Sample
@@ -78,6 +82,12 @@ Generic container for samples used, created, or destroyed in experiments.
 - __name*__
   - Type: string
   - Description: Descriptive name of the sample
+- __smiles__
+  - Type: string
+  - Description: SMILES notation of the molecular structure
+- __inchi__
+  - Type: string
+  - Description: InChI encoding of the molecular structure
 
 ### Experiment
 
@@ -86,3 +96,33 @@ Generic container for experiments covered by the dataset.
 - __id*__
   - Type: string
   - Description: Unique identifier for the experiment
+- __name*__
+  - Type: string
+  - Description: Descriptive name for the experiment
+- __experiment_type*__
+  - Type: ExperimentType
+  - Description: Kind of experiment performed
+- __measured_quantity*__
+  - Type: MeasuredQuantity
+  - Description: Quantity determined through the experiment
+
+### ExperimentType
+
+Generic container for the different kinds of experiment.
+
+- __none__
+  - Type: string
+  - Description: None
+
+#### MeasuredQuantity
+
+Enum containing quantities that are measured
+
+EE = "ee"
+TON = "TON"
+TOF = "TOF"
+YIELD = "yield"
+TIME = "time"
+TEMPERATURE = "temperature"
+CONCENTRATION = "concentration"
+MOLARITY = "molarity"

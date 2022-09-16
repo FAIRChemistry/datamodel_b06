@@ -1,6 +1,8 @@
 from .author import Author
 from .dataset import Dataset
 from .experiment import Experiment
+from .experimenttype import ExperimentType
+from .measuredquantity import MeasuredQuantity
 from .personalid import PersonalID
 from .sample import Sample
 
@@ -10,6 +12,8 @@ __all__ = [
     "Author",
     "Dataset",
     "Experiment",
+    "ExperimentType",
+    "MeasuredQuantity",
     "PersonalID",
     "Sample",
 ]

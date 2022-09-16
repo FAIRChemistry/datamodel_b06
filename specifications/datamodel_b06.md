@@ -14,7 +14,7 @@ This is a preliminary root container for all (meta-)data.
   - Default: New dataset
   - Description: Descriptive name of the dataset
 - __date*__
-  - Type: date
+  - Type: datetime
   - Default_factory: datetime.now
   - Description: Date/time when the dataset was created
 - __authors*__

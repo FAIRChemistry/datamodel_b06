@@ -118,7 +118,7 @@ Generic container for the different kinds of experiment.
 
 Enum containing quantities that are measured.
 
-```
+```python
 EE = "ee"
 TON = "TON"
 TOF = "TOF"
@@ -127,4 +127,4 @@ TIME = "time"
 TEMPERATURE = "temperature"
 CONCENTRATION = "concentration"
 MOLARITY = "molarity"
-````
+```

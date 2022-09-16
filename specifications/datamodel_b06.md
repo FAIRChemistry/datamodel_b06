@@ -11,7 +11,7 @@ This is a preliminary root container for all (meta-)data.
   - Description: Unique identifier for the dataset
 - __name*__
   - Type: string
-  - Default: New dataset
+  - Default: NewDataset
   - Description: Descriptive name of the dataset
 - __date*__
   - Type: datetime

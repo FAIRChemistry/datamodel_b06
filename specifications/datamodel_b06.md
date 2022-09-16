@@ -116,8 +116,9 @@ Generic container for the different kinds of experiment.
 
 #### MeasuredQuantity
 
-Enum containing quantities that are measured
+Enum containing quantities that are measured.
 
+```
 EE = "ee"
 TON = "TON"
 TOF = "TOF"
@@ -126,3 +127,4 @@ TIME = "time"
 TEMPERATURE = "temperature"
 CONCENTRATION = "concentration"
 MOLARITY = "molarity"
+````

@@ -11,7 +11,7 @@ This is a preliminary root container for all (meta-)data.
   - Description: Unique identifier for the dataset
 - __name*__
   - Type: string
-  - Default: NewDataset
+  - Default: Insert dataset name
   - Description: Descriptive name of the dataset
 - __date*__
   - Type: datetime
@@ -24,7 +24,6 @@ This is a preliminary root container for all (meta-)data.
 - __subjects*__
   - Type: string
   - Multiple: True
-  - Default: Chemistry
   - Description: Research subjects covered by the datset
 - __keywords*__
   - Type: string

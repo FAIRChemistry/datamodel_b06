@@ -112,7 +112,7 @@ Generic container for the different kinds of experiment.
 
 - __none__
   - Type: string
-  - Description: None
+  - Description: Some text
 
 #### MeasuredQuantity
 

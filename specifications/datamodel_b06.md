@@ -13,22 +13,28 @@ This is a preliminary root container for all (meta-)data.
   - Type: string
   - Default: Insert dataset name
   - Description: Descriptive name of the dataset
+  - Dataverse: pyDaRUS.Citation.title
 - __date*__
   - Type: datetime
   - Default_factory: datetime.now
   - Description: Date/time when the dataset was created
+  - Dataverse: pyDaRUS.Citation.production_date
 - __authors*__
   - Type: Author
   - Multiple: True
   - Description: Persons who worked on the dataset
+  - pyDaRUS.Citation.author.name
 - __subjects*__
-  - Type: string
+  - Type: pyDaRUS.Citation.SubjectEnum
+  - Default_factory: pyDaRUS.Citation.SubjectEnum.chemistry
   - Multiple: True
   - Description: Research subjects covered by the datset
+  - Dataverse: pyDaRUS.Citation.subject
 - __keywords*__
   - Type: string
   - Multiple: True
   - Description: Descriptive keywords to describe the dataset
+  - Dataverse: pyDaRUS.Citation.keyword.term
 - __license*__
   - Type: string
   - Default: MIT

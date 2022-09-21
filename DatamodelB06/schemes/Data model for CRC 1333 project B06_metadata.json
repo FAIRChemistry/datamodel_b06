@@ -1,29 +1,42 @@
 {
   "docstring": "This is the perliminary data model for CRC 1333 project B06. At the current time, the data model is still under development and major changes can occur at any time. Please feel free to make changes and contribute to the project.",
+  "enums": [
+    "MeasuredQuantity"
+  ],
+  "external": {},
   "Dataset": {
     "attributes": {
       "id": {
         "description": "Unique identifier for the dataset"
       },
       "name": {
-        "description": "Descriptive name of the dataset"
+        "default": "Insert dataset name",
+        "description": "Descriptive name of the dataset",
+        "dataverse": "pyDaRUS.Citation.title"
       },
       "date": {
-        "description": "Date/time when the dataset was created"
+        "default_factory": "datetime.now",
+        "description": "Date/time when the dataset was created",
+        "dataverse": "pyDaRUS.Citation.production_date"
       },
       "authors": {
         "multiple": "True",
-        "description": "Persons who worked on the dataset"
+        "description": "Persons who worked on the dataset",
+        "dataverse": "pyDaRUS.Citation.author.name"
       },
       "subjects": {
+        "default": "Chemistry",
         "multiple": "True",
-        "description": "Research subjects covered by the datset"
+        "description": "Research subjects covered by the datset",
+        "dataverse": "pyDaRUS.Citation.subject"
       },
       "keywords": {
         "multiple": "True",
-        "description": "Descriptive keywords to describe the dataset"
+        "description": "Descriptive keywords to describe the dataset",
+        "dataverse": "pyDaRUS.Citation.keyword.term"
       },
       "license": {
+        "default": "MIT",
         "description": "License for the dataset"
       },
       "samples": {
@@ -73,6 +86,12 @@
     "attributes": {
       "name": {
         "description": "Descriptive name of the sample"
+      },
+      "smiles": {
+        "description": "SMILES notation of the molecular structure"
+      },
+      "inchi": {
+        "description": "InChI encoding of the molecular structure"
       }
     },
     "docstring": "Generic container for samples used, created, or destroyed in experiments.\n"
@@ -81,8 +100,25 @@
     "attributes": {
       "id": {
         "description": "Unique identifier for the experiment"
+      },
+      "name": {
+        "description": "Descriptive name for the experiment"
+      },
+      "experiment_type": {
+        "description": "Kind of experiment performed"
+      },
+      "measured_quantity": {
+        "description": "Quantity determined through the experiment"
       }
     },
-    "docstring": "Generic container for experiments covered by the dataset."
+    "docstring": "Generic container for experiments covered by the dataset.\n"
+  },
+  "ExperimentType": {
+    "attributes": {
+      "none": {
+        "description": "Some text"
+      }
+    },
+    "docstring": "Generic container for the different kinds of experiment."
   }
 }

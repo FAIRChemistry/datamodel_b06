@@ -2,6 +2,7 @@ import sdRDM
 
 from typing import Optional
 from typing import List
+from typing import Optional, Union
 from pydantic import PrivateAttr
 from pydantic import Field
 from sdRDM.base.listplus import ListPlus
@@ -64,8 +65,8 @@ class Dataset(sdRDM.DataModel):
         name: str,
         affiliation: str,
         email: str,
+        pid: List[PersonalID],
         phone: Optional[int] = None,
-        pid: List[PersonalID] = ListPlus(),
     ) -> None:
         """
         Adds an instance of 'Author' to the attribute 'authors'.
@@ -82,14 +83,14 @@ class Dataset(sdRDM.DataModel):
             email (str): Contact e-mail address of the author.
 
 
-            phone (Optional[int]): Contact phone number of the author. Defaults to None
-
-
             pid (List[PersonalID]): Personal identifiers of the author.
+
+
+            phone (Optional[int]): Contact phone number of the author. Defaults to None
         """
         authors = [
             Author(
-                name=name, affiliation=affiliation, email=email, phone=phone, pid=pid
+                name=name, affiliation=affiliation, email=email, pid=pid, phone=phone
             )
         ]
         self.authors = self.authors + authors

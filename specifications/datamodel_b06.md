@@ -25,8 +25,8 @@ This is a preliminary root container for all (meta-)data.
   - Description: Persons who worked on the dataset
   - Dataverse: pyDaRUS.Citation.author.name
 - __subjects*__
-  - Type: pyDaRUS.Citation.SubjectEnum
-  - Default_factory: pyDaRUS.Citation.SubjectEnum.chemistry
+  - Type: string
+  - Default: Chemistry
   - Multiple: True
   - Description: Research subjects covered by the datset
   - Dataverse: pyDaRUS.Citation.subject

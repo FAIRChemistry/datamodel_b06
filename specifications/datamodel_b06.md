@@ -23,7 +23,7 @@ This is a preliminary root container for all (meta-)data.
   - Type: Author
   - Multiple: True
   - Description: Persons who worked on the dataset
-  - pyDaRUS.Citation.author.name
+  - Dataverse: pyDaRUS.Citation.author.name
 - __subjects*__
   - Type: pyDaRUS.Citation.SubjectEnum
   - Default_factory: pyDaRUS.Citation.SubjectEnum.chemistry

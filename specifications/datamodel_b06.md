@@ -142,27 +142,27 @@ Generic container for reactions coverd by this dataset.
   - Description: Accepted name(s) of the reaction
   - Dataverse: pyDaRUS.EnzymeMl.reactions.name
 - __educts*__
-  - Type: Sample.name
+  - Type: string
   - Multiple: True
   - Description: Definied samples that participated in the reaction as educts
   - Dataverse: pyDaRUS.EnzymeMl.reactions.educts
 - __products*__
-  - Type: Sample.name
+  - Type: string
   - Multiple: True
   - Description: Definied samples that participated in the reaction as products
   - Dataverse: pyDaRUS.EnzymeMl.reactions.products
 - __intermediates__
-  - Type: Sample.name
+  - Type: string
   - Multiple: True
   - Description: Definied samples that participated in the reaction as intermediates
   - Dataverse: pyDaRUS.EnzymeMl.reactions.modifiers
 - __catalysts__
-  - Type: Sample.name
+  - Type: string
   - Multiple: True
   - Description: Definied samples that participated in the reaction as (co-)catalysts
   - Dataverse: pyDaRUS.EnzymeMl.reactions.modifiers
 - __generic_modifiers__
-  - Type: Sample.name
+  - Type: string
   - Multiple: True
   - Description: Definied samples that participated in the reaction in some other manner
   - Dataverse: pyDaRUS.EnzymeMl.reactions.modifiers

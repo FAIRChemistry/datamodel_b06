@@ -194,10 +194,10 @@ Generic Container for analyses.
   - Type: MeasuredQuantity
   - Description: Quantity determined through the analysis
 - __dsv_file_raw*__
-  - Type: string, bytes, os.PathLike
+  - Type: string
   - Description: Delimiter-seperated file containing the raw data of the analysis
 - __dsv_file_results__
-  - Type: string, bytes, os.PathLike
+  - Type: string
   - Description: Delimiter-seperated file containing the results of the analysis
 
 #### InitialConcentrationUnit

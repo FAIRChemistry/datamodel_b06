@@ -7,6 +7,8 @@ from pydantic import Field
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
+from .initialconcentrationunit import InitialConcentrationUnit
+
 
 class Sample(sdRDM.DataModel):
     """Generic container for samples used, created, or destroyed in experiments."""
@@ -25,6 +27,18 @@ class Sample(sdRDM.DataModel):
 
     inchi: Optional[str] = Field(
         description="InChI encoding of the molecular structure", default=None
+    )
+
+    initial_concentration: Optional[float] = Field(
+        description="Numerical value of the initial concentration",
+        dataverse="pyDaRUS.EnzymeMl.reactants.initial_concentration",
+        default=None,
+    )
+
+    unit: Optional[InitialConcentrationUnit] = Field(
+        description="Unit of the numerical value used in inital_concentration",
+        dataverse="pyDaRUS.EnzymeMl.reactans.unit",
+        default=None,
     )
 
     __repo__: Optional[str] = PrivateAttr(

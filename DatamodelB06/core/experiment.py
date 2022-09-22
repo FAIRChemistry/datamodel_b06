@@ -2,10 +2,14 @@ import sdRDM
 
 from typing import Optional
 from typing import Optional, Union
+from typing import Union
 from pydantic import PrivateAttr
 from pydantic import Field
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
+
+from .analysis import Analysis
+from .reaction import Reaction
 
 
 class Experiment(sdRDM.DataModel):
@@ -19,8 +23,8 @@ class Experiment(sdRDM.DataModel):
         ..., description="Kind of experiment performed"
     )
 
-    measured_quantity: MeasuredQuantity = Field(
-        ..., description="Quantity determined through the experiment"
+    details: Optional[str] = Field(
+        description="Free form detailed description of the experiment", default=None
     )
 
     __repo__: Optional[str] = PrivateAttr(

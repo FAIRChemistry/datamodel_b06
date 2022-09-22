@@ -1,6 +1,7 @@
 {
   "docstring": "This is the perliminary data model for CRC 1333 project B06. At the current time, the data model is still under development and major changes can occur at any time. Please feel free to make changes and contribute to the project.",
   "enums": [
+    "InitialConcentrationUnit",
     "MeasuredQuantity"
   ],
   "external": {},
@@ -53,10 +54,12 @@
   "Author": {
     "attributes": {
       "name": {
-        "description": "Full name of the author"
+        "description": "Full name of the author",
+        "dataverse": "pyDaRUS.Citation.author.name"
       },
       "affiliation": {
-        "description": "Organisation the author is affiliated with."
+        "description": "Organisation the author is affiliated with.",
+        "dataverse": "pyDaRUS.Citation.author.affiliation"
       },
       "email": {
         "description": "Contact e-mail address of the author"
@@ -74,24 +77,41 @@
   "PersonalID": {
     "attributes": {
       "type": {
-        "description": "Type or scheme of personal identifier"
+        "description": "Type or scheme of personal identifier",
+        "dataverse": "pyDaRUS.Citation.author.identifier_scheme"
       },
       "identifier": {
-        "description": "String representation of the personal identifier"
+        "description": "String representation of the personal identifier",
+        "dataverse": "pyDaRUS.Citation.author.identifier"
       }
     },
-    "docstring": "Container for personal identifiers related to an author\n"
+    "docstring": "Container for personal identifiers related to an author.\n"
   },
   "Sample": {
     "attributes": {
+      "id": {
+        "description": "Unique identifier for the sample, following the EnzymeML convention \"s[integer]\", e.g. s001",
+        "dataverse": "pyDaRUS.EnzymeMl.reactants.identifier"
+      },
       "name": {
-        "description": "Descriptive name of the sample"
+        "description": "Descriptive name of the sample",
+        "dataverse": "pyDaRUS.EnzymeMl.reactants.name"
       },
       "smiles": {
-        "description": "SMILES notation of the molecular structure"
+        "description": "SMILES notation of the molecular structure",
+        "dataverse": "pyDaRUS.EnzymeMl.reactants.smilescode"
       },
       "inchi": {
-        "description": "InChI encoding of the molecular structure"
+        "description": "InChI encoding of the molecular structure",
+        "dataverse": "pyDaRUS.EnzymeMl.reactants.inchicode"
+      },
+      "initial_concentration": {
+        "description": "Numerical value of the initial concentration",
+        "dataverse": "pyDaRUS.EnzymeMl.reactants.initial_concentration"
+      },
+      "unit": {
+        "description": "Unit of the numerical value used in inital_concentration",
+        "dataverse": "pyDaRUS.EnzymeMl.reactans.unit"
       }
     },
     "docstring": "Generic container for samples used, created, or destroyed in experiments.\n"
@@ -107,18 +127,80 @@
       "experiment_type": {
         "description": "Kind of experiment performed"
       },
-      "measured_quantity": {
-        "description": "Quantity determined through the experiment"
+      "details": {
+        "description": "Free form detailed description of the experiment"
       }
     },
     "docstring": "Generic container for experiments covered by the dataset.\n"
   },
-  "ExperimentType": {
+  "Reaction": {
     "attributes": {
-      "none": {
-        "description": "Some text"
+      "id": {
+        "description": "Unique identifier for the synthesis"
+      },
+      "name": {
+        "description": "Accepted name(s) of the reaction",
+        "dataverse": "pyDaRUS.EnzymeMl.reactions.name"
+      },
+      "educts": {
+        "multiple": "True",
+        "description": "Definied samples that participated in the reaction as educts",
+        "dataverse": "pyDaRUS.EnzymeMl.reactions.educts"
+      },
+      "products": {
+        "multiple": "True",
+        "description": "Definied samples that participated in the reaction as products",
+        "dataverse": "pyDaRUS.EnzymeMl.reactions.products"
+      },
+      "intermediates": {
+        "multiple": "True",
+        "description": "Definied samples that participated in the reaction as intermediates",
+        "dataverse": "pyDaRUS.EnzymeMl.reactions.modifiers"
+      },
+      "catalysts": {
+        "multiple": "True",
+        "description": "Definied samples that participated in the reaction as (co-)catalysts",
+        "dataverse": "pyDaRUS.EnzymeMl.reactions.modifiers"
+      },
+      "generic_modifiers": {
+        "multiple": "True",
+        "description": "Definied samples that participated in the reaction in some other manner",
+        "dataverse": "pyDaRUS.EnzymeMl.reactions.modifiers"
+      },
+      "conditions": {
+        "multiple": "True",
+        "description": "Different conditions that need to be specified for reproducing the reaction"
       }
     },
-    "docstring": "Generic container for the different kinds of experiment."
+    "docstring": "Generic container for reactions coverd by this dataset.\n"
+  },
+  "Condition": {
+    "attributes": {
+      "currently_under_construction_come_back_later": {
+        "default": "None",
+        "description": "tba"
+      }
+    },
+    "docstring": "Generic container for conditions that influenced a reaction\n"
+  },
+  "Analysis": {
+    "attributes": {
+      "id": {
+        "description": "Unique identifier for the analysis"
+      },
+      "name": {
+        "description": "Descriptive name for the analysis"
+      },
+      "measured_quantity": {
+        "description": "Quantity determined through the analysis"
+      },
+      "dsv_file_raw": {
+        "description": "Delimiter-seperated file containing the raw data of the analysis"
+      },
+      "dsv_file_results": {
+        "description": "Delimiter-seperated file containing the results of the analysis"
+      }
+    },
+    "docstring": "Generic Container for analyses."
   }
 }

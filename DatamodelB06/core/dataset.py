@@ -3,6 +3,7 @@ import sdRDM
 from typing import Optional
 from typing import List
 from typing import Optional, Union
+from typing import Union
 from pydantic import PrivateAttr
 from pydantic import Field
 from sdRDM.base.listplus import ListPlus
@@ -13,8 +14,9 @@ from .author import Author
 from .experiment import Experiment
 from .personalid import PersonalID
 from .sample import Sample
-from .experimenttype import ExperimentType
-from .measuredquantity import MeasuredQuantity
+from .analysis import Analysis
+from .initialconcentrationunit import InitialConcentrationUnit
+from .reaction import Reaction
 
 
 class Dataset(sdRDM.DataModel):
@@ -96,12 +98,21 @@ class Dataset(sdRDM.DataModel):
         self.authors = self.authors + authors
 
     def add_to_samples(
-        self, name: str, smiles: Optional[str] = None, inchi: Optional[str] = None
+        self,
+        id: str,
+        name: str,
+        smiles: Optional[str] = None,
+        inchi: Optional[str] = None,
+        initial_concentration: Optional[float] = None,
+        unit: Optional[InitialConcentrationUnit] = None,
     ) -> None:
         """
         Adds an instance of 'Sample' to the attribute 'samples'.
 
         Args:
+
+
+            id (str): Unique identifier for the sample, following the EnzymeML convention "s[integer]", e.g. s001.
 
 
             name (str): Descriptive name of the sample.
@@ -111,16 +122,31 @@ class Dataset(sdRDM.DataModel):
 
 
             inchi (Optional[str]): InChI encoding of the molecular structure. Defaults to None
+
+
+            initial_concentration (Optional[float]): Numerical value of the initial concentration. Defaults to None
+
+
+            unit (Optional[InitialConcentrationUnit]): Unit of the numerical value used in inital_concentration. Defaults to None
         """
-        samples = [Sample(name=name, smiles=smiles, inchi=inchi)]
+        samples = [
+            Sample(
+                id=id,
+                name=name,
+                smiles=smiles,
+                inchi=inchi,
+                initial_concentration=initial_concentration,
+                unit=unit,
+            )
+        ]
         self.samples = self.samples + samples
 
     def add_to_experiments(
         self,
         id: str,
         name: str,
-        experiment_type: ExperimentType,
-        measured_quantity: MeasuredQuantity,
+        experiment_type: Union[Reaction, Analysis],
+        details: Optional[str] = None,
     ) -> None:
         """
         Adds an instance of 'Experiment' to the attribute 'experiments'.
@@ -134,17 +160,14 @@ class Dataset(sdRDM.DataModel):
             name (str): Descriptive name for the experiment.
 
 
-            experiment_type (ExperimentType): Kind of experiment performed.
+            experiment_type (Union[Reaction,Analysis]): Kind of experiment performed.
 
 
-            measured_quantity (MeasuredQuantity): Quantity determined through the experiment.
+            details (Optional[str]): Free form detailed description of the experiment. Defaults to None
         """
         experiments = [
             Experiment(
-                id=id,
-                name=name,
-                experiment_type=experiment_type,
-                measured_quantity=measured_quantity,
+                id=id, name=name, experiment_type=experiment_type, details=details
             )
         ]
         self.experiments = self.experiments + experiments

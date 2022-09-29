@@ -8,8 +8,8 @@ from pydantic import Field
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
-from .analysis import Analysis
 from .reaction import Reaction
+from .analytics import Analytics
 
 
 class Experiment(sdRDM.DataModel):

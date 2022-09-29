@@ -14,9 +14,9 @@ from .author import Author
 from .experiment import Experiment
 from .personalid import PersonalID
 from .sample import Sample
-from .analysis import Analysis
-from .initialconcentrationunit import InitialConcentrationUnit
 from .reaction import Reaction
+from .analytics import Analytics
+from .concentrationunit import ConcentrationUnit
 
 
 class Dataset(sdRDM.DataModel):
@@ -104,7 +104,7 @@ class Dataset(sdRDM.DataModel):
         smiles: Optional[str] = None,
         inchi: Optional[str] = None,
         initial_concentration: Optional[float] = None,
-        unit: Optional[InitialConcentrationUnit] = None,
+        unit: Optional[ConcentrationUnit] = None,
     ) -> None:
         """
         Adds an instance of 'Sample' to the attribute 'samples'.
@@ -127,7 +127,7 @@ class Dataset(sdRDM.DataModel):
             initial_concentration (Optional[float]): Numerical value of the initial concentration. Defaults to None
 
 
-            unit (Optional[InitialConcentrationUnit]): Unit of the numerical value used in inital_concentration. Defaults to None
+            unit (Optional[ConcentrationUnit]): Unit of the numerical value used in inital_concentration. Defaults to None
         """
         samples = [
             Sample(
@@ -145,7 +145,7 @@ class Dataset(sdRDM.DataModel):
         self,
         id: str,
         name: str,
-        experiment_type: Union[Reaction, Analysis],
+        experiment_type: Union[Reaction, Analytics],
         details: Optional[str] = None,
     ) -> None:
         """
@@ -160,7 +160,7 @@ class Dataset(sdRDM.DataModel):
             name (str): Descriptive name for the experiment.
 
 
-            experiment_type (Union[Reaction,Analysis]): Kind of experiment performed.
+            experiment_type (Union[Reaction,Analytics]): Kind of experiment performed.
 
 
             details (Optional[str]): Free form detailed description of the experiment. Defaults to None

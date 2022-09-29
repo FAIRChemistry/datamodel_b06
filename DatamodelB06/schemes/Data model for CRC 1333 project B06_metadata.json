@@ -1,7 +1,7 @@
 {
   "docstring": "This is the perliminary data model for CRC 1333 project B06. At the current time, the data model is still under development and major changes can occur at any time. Please feel free to make changes and contribute to the project.",
   "enums": [
-    "InitialConcentrationUnit",
+    "ConcentrationUnit",
     "MeasuredQuantity"
   ],
   "external": {},
@@ -142,29 +142,33 @@
         "description": "Accepted name(s) of the reaction",
         "dataverse": "pyDaRUS.EnzymeMl.reactions.name"
       },
-      "educts": {
+      "starting_materials": {
         "multiple": "True",
-        "description": "Definied samples that participated in the reaction as educts",
+        "description": "Defines samples that participate in the reaction as starting materials",
         "dataverse": "pyDaRUS.EnzymeMl.reactions.educts"
       },
       "products": {
         "multiple": "True",
-        "description": "Definied samples that participated in the reaction as products",
+        "description": "Defines samples that participate in the reaction as products",
         "dataverse": "pyDaRUS.EnzymeMl.reactions.products"
+      },
+      "solvents": {
+        "multiple": "True",
+        "description": "Defines samples that participate in the reaction as solvents"
       },
       "intermediates": {
         "multiple": "True",
-        "description": "Definied samples that participated in the reaction as intermediates",
+        "description": "Defines samples that participate in the reaction as intermediates",
         "dataverse": "pyDaRUS.EnzymeMl.reactions.modifiers"
       },
       "catalysts": {
         "multiple": "True",
-        "description": "Definied samples that participated in the reaction as (co-)catalysts",
+        "description": "Defines samples that participate in the reaction as (co-)catalysts",
         "dataverse": "pyDaRUS.EnzymeMl.reactions.modifiers"
       },
       "generic_modifiers": {
         "multiple": "True",
-        "description": "Definied samples that participated in the reaction in some other manner",
+        "description": "Defines samples that participate in the reaction in some other manner",
         "dataverse": "pyDaRUS.EnzymeMl.reactions.modifiers"
       },
       "conditions": {
@@ -176,14 +180,16 @@
   },
   "Condition": {
     "attributes": {
-      "currently_under_construction_come_back_later": {
-        "default": "None",
-        "description": "tba"
+      "name": {
+        "description": "Descriptive name of the condition that influenced a reaction"
+      },
+      "explanation": {
+        "description": "Free text description and explanation of the condition"
       }
     },
     "docstring": "Generic container for conditions that influenced a reaction\n"
   },
-  "Analysis": {
+  "Analytics": {
     "attributes": {
       "id": {
         "description": "Unique identifier for the analysis"

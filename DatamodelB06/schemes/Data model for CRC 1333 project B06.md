@@ -4,11 +4,11 @@ classDiagram
     Dataset *-- Sample
     Dataset *-- Experiment
     Author *-- PersonalID
-    Sample *-- InitialConcentrationUnit
+    Sample *-- ConcentrationUnit
     Experiment *-- Reaction
-    Experiment *-- Analysis
+    Experiment *-- Analytics
     Reaction *-- Condition
-    Analysis *-- MeasuredQuantity
+    Analytics *-- MeasuredQuantity
     
     class Dataset {
         +string id*
@@ -41,21 +41,22 @@ classDiagram
         +string smiles
         +string inchi
         +float initial_concentration
-        +InitialConcentrationUnit unit
+        +ConcentrationUnit unit
     }
     
     class Experiment {
         +string id*
         +string name*
-        +Union[Reaction,Analysis] experiment_type*
+        +Union[Reaction,Analytics] experiment_type*
         +string details
     }
     
     class Reaction {
         +string id*
         +string name*
-        +string[0..*] educts*
+        +string[0..*] starting_materials*
         +string[0..*] products*
+        +string[0..*] solvents
         +string[0..*] intermediates
         +string[0..*] catalysts
         +string[0..*] generic_modifiers
@@ -63,10 +64,11 @@ classDiagram
     }
     
     class Condition {
-        +bool currently_under_construction_come_back_later
+        +string name*
+        +string explanation*
     }
     
-    class Analysis {
+    class Analytics {
         +string id*
         +string name*
         +MeasuredQuantity measured_quantity*
@@ -74,12 +76,12 @@ classDiagram
         +string dsv_file_results
     }
     
-    class InitialConcentrationUnit {
+    class ConcentrationUnit {
         << Enumeration >>
-        +n_m = 'nM'
-        +u_m = 'uM'
-        +m_m = 'mM'
-        +m = 'M'
+        +n_m = 'nmol/l'
+        +u_m = 'umol/l'
+        +m_m = 'mmol/l'
+        +m = 'mol/l'
     }
     
     class MeasuredQuantity {

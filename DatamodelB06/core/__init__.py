@@ -1,4 +1,3 @@
-
 from .analytics import Analytics
 from .author import Author
 from .concentrationunit import ConcentrationUnit
@@ -10,9 +9,7 @@ from .personalid import PersonalID
 from .reaction import Reaction
 from .sample import Sample
 
-__doc__ = "This is the perliminary data model for CRC 1333 project B06. At the current time, the data model is still under development and major changes can occur at any time. Please feel free to make changes and contribute to the project.
-
-## Generic  citation data model"
+__doc__ = "This is the perliminary data model for CRC 1333 project B06. At the current time, the data model is still under development and major changes can occur at any time. Please feel free to make changes and contribute to the project."
 
 __all__ = [
     "Analytics",

@@ -1,19 +1,15 @@
 import sdRDM
 
 from typing import Optional, Union
+from typing import Optional
 from pydantic import PrivateAttr
+from pydantic import Field
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
-
-from pydantic import Field
-from typing import Optional
-
-from .measuredquantity import MeasuredQuantity
 
 
 @forge_signature
 class Analytics(sdRDM.DataModel):
-
     """Generic Container for analyses."""
 
     id: str = Field(
@@ -21,19 +17,11 @@ class Analytics(sdRDM.DataModel):
         default_factory=IDGenerator("analyticsINDEX"),
         xml="@id",
     )
-    id: str = Field(
-        ...,
-        description="Unique identifier for the analysis",
-    )
 
-    name: str = Field(
-        ...,
-        description="Descriptive name for the analysis",
-    )
+    name: str = Field(..., description="Descriptive name for the analysis")
 
     measured_quantity: MeasuredQuantity = Field(
-        ...,
-        description="Quantity determined through the analysis",
+        ..., description="Quantity determined through the analysis"
     )
 
     dsv_file_raw: str = Field(
@@ -49,6 +37,7 @@ class Analytics(sdRDM.DataModel):
     __repo__: Optional[str] = PrivateAttr(
         default="git://github.com/FAIRChemistry/datamodel_b06.git"
     )
+
     __commit__: Optional[str] = PrivateAttr(
         default="df4603aa559489039cf14fdb3cdae6345c36f0c8"
     )

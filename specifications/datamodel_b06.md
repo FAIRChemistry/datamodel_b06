@@ -109,7 +109,7 @@ Generic container for samples used, created, or destroyed in experiments.
   - Description: Numerical value of the initial concentration
   - Dataverse: pyDaRUS.EnzymeMl.reactants.initial_concentration
 - __unit__
-  - Type: InitialConcentrationUnit
+  - Type: ConcentrationUnit
   - Description: Unit of the numerical value used in inital_concentration
   - Dataverse: pyDaRUS.EnzymeMl.reactans.unit
 
@@ -141,30 +141,34 @@ Generic container for reactions coverd by this dataset.
   - Type: string
   - Description: Accepted name(s) of the reaction
   - Dataverse: pyDaRUS.EnzymeMl.reactions.name
-- __educts*__
+- __starting_materials*__
   - Type: string
   - Multiple: True
-  - Description: Definied samples that participated in the reaction as educts
+  - Description: Defines samples that participate in the reaction as starting materials
   - Dataverse: pyDaRUS.EnzymeMl.reactions.educts
 - __products*__
   - Type: string
   - Multiple: True
-  - Description: Definied samples that participated in the reaction as products
+  - Description: Defines samples that participate in the reaction as products
   - Dataverse: pyDaRUS.EnzymeMl.reactions.products
+- __solvents__
+  - Type: string
+  - Multiple: True
+  - Description: Defines samples that participate in the reaction as solvents
 - __intermediates__
   - Type: string
   - Multiple: True
-  - Description: Definied samples that participated in the reaction as intermediates
+  - Description: Defines samples that participate in the reaction as intermediates
   - Dataverse: pyDaRUS.EnzymeMl.reactions.modifiers
 - __catalysts__
   - Type: string
   - Multiple: True
-  - Description: Definied samples that participated in the reaction as (co-)catalysts
+  - Description: Defines samples that participate in the reaction as (co-)catalysts
   - Dataverse: pyDaRUS.EnzymeMl.reactions.modifiers
 - __generic_modifiers__
   - Type: string
   - Multiple: True
-  - Description: Definied samples that participated in the reaction in some other manner
+  - Description: Defines samples that participate in the reaction in some other manner
   - Dataverse: pyDaRUS.EnzymeMl.reactions.modifiers
 - __conditions*__
   - Type: Condition
@@ -175,12 +179,14 @@ Generic container for reactions coverd by this dataset.
 
 Generic container for conditions that influenced a reaction
 
-- __currently_under_construction_come_back_later__
-  - Type: bool
-  - Default: None
-  - Description: tba
+- __name*__
+  - Type: string
+  - Description: Descriptive name of the condition that influenced a reaction
+- __explanation*__
+  - Type: string
+  - Description: Free text description and explanation of the condition
 
-### Analysis
+### Analytics
 
 Generic Container for analyses.
 
@@ -200,15 +206,15 @@ Generic Container for analyses.
   - Type: string
   - Description: Delimiter-seperated file containing the results of the analysis
 
-#### InitialConcentrationUnit
+#### ConcentrationUnit
 
-Enum containing the units for the initial concentration.
+Enum containing the units for the concentration.
 
 ```python
-n_m = 'nM'
-u_m = 'uM'
-m_m = 'mM'
-m = 'M'
+n_m = 'nmol/l'
+u_m = 'umol/l'
+m_m = 'mmol/l'
+m = 'mol/l'
 ```
 
 #### MeasuredQuantity

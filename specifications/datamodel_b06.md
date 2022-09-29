@@ -2,6 +2,8 @@
 
 This is the perliminary data model for CRC 1333 project B06. At the current time, the data model is still under development and major changes can occur at any time. Please feel free to make changes and contribute to the project.
 
+## Generic / citation data model
+
 ### Dataset
 
 This is a preliminary root container for all (meta-)data.
@@ -84,6 +86,8 @@ Container for personal identifiers related to an author.
   - Description: String representation of the personal identifier
   - Dataverse: pyDaRUS.Citation.author.identifier
 
+## Specific data model
+
 ### Sample
 
 Generic container for samples used, created, or destroyed in experiments.
@@ -124,7 +128,7 @@ Generic container for experiments covered by the dataset.
   - Type: string
   - Description: Descriptive name for the experiment
 - __experiment_type*__
-  - Type: Reaction, Analysis
+  - Type: Reaction, Analytics
   - Description: Kind of experiment performed
 - __details__
   - Type: string

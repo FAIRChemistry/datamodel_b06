@@ -47,6 +47,9 @@ This is a preliminary root container for all (meta-)data.
   - Type: Experiment
   - Multiple: True
   - Description: Experiments covered by this dataset
+- __HiKuan__
+  - Type: string
+  - Description: Hi Kuan!
 
 ### Author
 

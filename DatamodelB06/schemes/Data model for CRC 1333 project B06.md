@@ -20,6 +20,7 @@ classDiagram
         +string license*
         +Sample[0..*] samples*
         +Experiment[0..*] experiments*
+        +string HiKuan
     }
     
     class Author {

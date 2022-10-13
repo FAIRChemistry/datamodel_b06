@@ -44,11 +44,14 @@ class Author(sdRDM.DataModel):
         default="bb4b1117c1d706a506a972e3d67456fcc85dbc31"
     )
 
-    def add_to_pid(self, type: str, identifier: str) -> None:
+    def add_to_pid(self, type: str, identifier: str, id: Optional[str] = None) -> None:
         """
         Adds an instance of 'PersonalID' to the attribute 'pid'.
 
         Args:
+
+
+            id (str): Unique identifier of the 'PersonalID' object. Defaults to 'None'.
 
 
             type (str): Type or scheme of personal identifier.
@@ -56,5 +59,9 @@ class Author(sdRDM.DataModel):
 
             identifier (str): String representation of the personal identifier.
         """
-        pid = [PersonalID(type=type, identifier=identifier)]
+
+        params = {"type": type, "identifier": identifier}
+        if id is not None:
+            params["id"] = id
+        pid = [PersonalID(**params)]
         self.pid = self.pid + pid

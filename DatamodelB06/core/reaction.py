@@ -86,11 +86,16 @@ class Reaction(sdRDM.DataModel):
         default="4aa69459dec606669cde5b1b942ae648025a1dd4"
     )
 
-    def add_to_conditions(self, name: str, explanation: str) -> None:
+    def add_to_conditions(
+        self, name: str, explanation: str, id: Optional[str] = None
+    ) -> None:
         """
         Adds an instance of 'Condition' to the attribute 'conditions'.
 
         Args:
+
+
+            id (str): Unique identifier of the 'Condition' object. Defaults to 'None'.
 
 
             name (str): Descriptive name of the condition that influenced a reaction.
@@ -98,5 +103,9 @@ class Reaction(sdRDM.DataModel):
 
             explanation (str): Free text description and explanation of the condition.
         """
-        conditions = [Condition(name=name, explanation=explanation)]
+
+        params = {"name": name, "explanation": explanation}
+        if id is not None:
+            params["id"] = id
+        conditions = [Condition(**params)]
         self.conditions = self.conditions + conditions

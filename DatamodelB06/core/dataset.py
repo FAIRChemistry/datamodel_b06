@@ -54,6 +54,8 @@ class Dataset(sdRDM.DataModel):
         description="Experiments covered by this dataset", default_factory=ListPlus
     )
 
+    HiKuan: Optional[str] = Field(description="Hi Kuan!", default=None)
+
     __repo__: Optional[str] = PrivateAttr(
         default="git://github.com/FAIRChemistry/datamodel_b06.git"
     )
@@ -69,11 +71,15 @@ class Dataset(sdRDM.DataModel):
         email: str,
         pid: List[PersonalID],
         phone: Optional[int] = None,
+        id: Optional[str] = None,
     ) -> None:
         """
         Adds an instance of 'Author' to the attribute 'authors'.
 
         Args:
+
+
+            id (str): Unique identifier of the 'Author' object. Defaults to 'None'.
 
 
             name (str): Full name of the author.
@@ -90,11 +96,17 @@ class Dataset(sdRDM.DataModel):
 
             phone (Optional[int]): Contact phone number of the author. Defaults to None
         """
-        authors = [
-            Author(
-                name=name, affiliation=affiliation, email=email, pid=pid, phone=phone
-            )
-        ]
+
+        params = {
+            "name": name,
+            "affiliation": affiliation,
+            "email": email,
+            "pid": pid,
+            "phone": phone,
+        }
+        if id is not None:
+            params["id"] = id
+        authors = [Author(**params)]
         self.authors = self.authors + authors
 
     def add_to_samples(
@@ -105,11 +117,15 @@ class Dataset(sdRDM.DataModel):
         inchi: Optional[str] = None,
         initial_concentration: Optional[float] = None,
         unit: Optional[ConcentrationUnit] = None,
+        id: Optional[str] = None,
     ) -> None:
         """
         Adds an instance of 'Sample' to the attribute 'samples'.
 
         Args:
+
+
+            id (str): Unique identifier of the 'Sample' object. Defaults to 'None'.
 
 
             id (str): Unique identifier for the sample, following the EnzymeML convention "s[integer]", e.g. s001.
@@ -129,16 +145,18 @@ class Dataset(sdRDM.DataModel):
 
             unit (Optional[ConcentrationUnit]): Unit of the numerical value used in inital_concentration. Defaults to None
         """
-        samples = [
-            Sample(
-                id=id,
-                name=name,
-                smiles=smiles,
-                inchi=inchi,
-                initial_concentration=initial_concentration,
-                unit=unit,
-            )
-        ]
+
+        params = {
+            "id": id,
+            "name": name,
+            "smiles": smiles,
+            "inchi": inchi,
+            "initial_concentration": initial_concentration,
+            "unit": unit,
+        }
+        if id is not None:
+            params["id"] = id
+        samples = [Sample(**params)]
         self.samples = self.samples + samples
 
     def add_to_experiments(
@@ -147,11 +165,15 @@ class Dataset(sdRDM.DataModel):
         name: str,
         experiment_type: Union[Reaction, Analytics],
         details: Optional[str] = None,
+        id: Optional[str] = None,
     ) -> None:
         """
         Adds an instance of 'Experiment' to the attribute 'experiments'.
 
         Args:
+
+
+            id (str): Unique identifier of the 'Experiment' object. Defaults to 'None'.
 
 
             id (str): Unique identifier for the experiment.
@@ -165,9 +187,14 @@ class Dataset(sdRDM.DataModel):
 
             details (Optional[str]): Free form detailed description of the experiment. Defaults to None
         """
-        experiments = [
-            Experiment(
-                id=id, name=name, experiment_type=experiment_type, details=details
-            )
-        ]
+
+        params = {
+            "id": id,
+            "name": name,
+            "experiment_type": experiment_type,
+            "details": details,
+        }
+        if id is not None:
+            params["id"] = id
+        experiments = [Experiment(**params)]
         self.experiments = self.experiments + experiments

@@ -47,6 +47,9 @@
       "experiments": {
         "multiple": "True",
         "description": "Experiments covered by this dataset"
+      },
+      "HiKuan": {
+        "description": "Hi Kuan!"
       }
     },
     "docstring": "This is a preliminary root container for all (meta-)data.\n"

@@ -2,6 +2,7 @@
   "docstring": "This is the perliminary data model for CRC 1333 project B06. At the current time, the data model is still under development and major changes can occur at any time. Please feel free to make changes and contribute to the project.",
   "enums": [
     "ConcentrationUnit",
+    "ConcentrationUnit",
     "MeasuredQuantity"
   ],
   "external": {},

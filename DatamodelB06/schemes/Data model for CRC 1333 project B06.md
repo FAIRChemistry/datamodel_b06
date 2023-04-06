@@ -84,6 +84,14 @@ classDiagram
         +m = 'mol/l'
     }
     
+    class ConcentrationUnit {
+        << Enumeration >>
+        +n_m = 'nmol/l'
+        +u_m = 'umol/l'
+        +m_m = 'mmol/l'
+        +m = 'mol/l'
+    }
+    
     class MeasuredQuantity {
         << Enumeration >>
         +EE = "ee"

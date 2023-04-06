@@ -11,22 +11,28 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 class PersonalID(sdRDM.DataModel):
     """Container for personal identifiers related to an author"""
 
-    type: str = Field(..., description="Type or scheme of personal identifier")
-
-    identifier: str = Field(
-        ..., description="String representation of the personal identifier"
-    )
-
     id: str = Field(
         description="Unique identifier of the given object.",
         default_factory=IDGenerator("personalidINDEX"),
         xml="@id",
     )
 
+    type: str = Field(
+        ...,
+        description="Type or scheme of personal identifier",
+        dataverse="pyDaRUS.Citation.author.identifier_scheme",
+    )
+
+    identifier: str = Field(
+        ...,
+        description="String representation of the personal identifier",
+        dataverse="pyDaRUS.Citation.author.identifier",
+    )
+
     __repo__: Optional[str] = PrivateAttr(
-        default="git://github.com/FAIRChemistry/datamodel_b06.git"
+        default="https://github.com/FAIRChemistry/datamodel_b06.git"
     )
 
     __commit__: Optional[str] = PrivateAttr(
-        default="bb4b1117c1d706a506a972e3d67456fcc85dbc31"
+        default="e2fcf28747c1686bc5dbc48709d307e1ddd7947c"
     )

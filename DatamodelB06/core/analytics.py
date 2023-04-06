@@ -6,6 +6,7 @@ from pydantic import PrivateAttr
 from pydantic import Field
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
+from .measuredquantity import MeasuredQuantity
 
 
 @forge_signature
@@ -35,9 +36,9 @@ class Analytics(sdRDM.DataModel):
     )
 
     __repo__: Optional[str] = PrivateAttr(
-        default="git://github.com/FAIRChemistry/datamodel_b06.git"
+        default="https://github.com/FAIRChemistry/datamodel_b06.git"
     )
 
     __commit__: Optional[str] = PrivateAttr(
-        default="df4603aa559489039cf14fdb3cdae6345c36f0c8"
+        default="e2fcf28747c1686bc5dbc48709d307e1ddd7947c"
     )

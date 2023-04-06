@@ -9,7 +9,6 @@ from pydantic import Field
 from sdRDM.base.listplus import ListPlus
 from datetime import datetime
 from sdRDM.base.utils import forge_signature, IDGenerator
-
 from .author import Author
 from .experiment import Experiment
 from .personalid import PersonalID
@@ -22,27 +21,6 @@ from .concentrationunit import ConcentrationUnit
 class Dataset(sdRDM.DataModel):
     """This is a preliminary root container for all (meta-)data."""
 
-    id: str = Field(..., description="Unique identifier for the dataset")
-
-    name: str = Field(..., description="Descriptive name of the dataset")
-
-    date: datetime = Field(..., description="Date/time when the dataset was created")
-
-    license: str = Field(..., description="License for the dataset")
-
-    authors: List[Author] = Field(
-        description="Persons who worked on the dataset", default_factory=ListPlus
-    )
-
-    subjects: List[str] = Field(
-        description="Research subjects covered by the datset", default_factory=ListPlus
-    )
-
-    keywords: List[str] = Field(
-        description="Descriptive keywords to describe the dataset",
-        default_factory=ListPlus,
-    )
-
     samples: List[Sample] = Field(
         description=(
             "Samples used, created, or destroyed by experiments of this dataset"
@@ -54,12 +32,51 @@ class Dataset(sdRDM.DataModel):
         description="Experiments covered by this dataset", default_factory=ListPlus
     )
 
+    id: str = Field(
+        description="Unique identifier of the given object.",
+        default_factory=IDGenerator("datasetINDEX"),
+        xml="@id",
+    )
+
+    name: str = Field(
+        default="Insert dataset name",
+        description="Descriptive name of the dataset",
+        dataverse="pyDaRUS.Citation.title",
+    )
+
+    date: datetime = Field(
+        default_factory=datetime.now,
+        description="Date/time when the dataset was created",
+        dataverse="pyDaRUS.Citation.production_date",
+    )
+
+    authors: List[Author] = Field(
+        description="Persons who worked on the dataset",
+        dataverse="pyDaRUS.Citation.author.name",
+        default_factory=ListPlus,
+    )
+
+    subjects: List[str] = Field(
+        default="Chemistry",
+        description="Research subjects covered by the datset",
+        dataverse="pyDaRUS.Citation.subject",
+        default_factory=ListPlus,
+    )
+
+    keywords: List[str] = Field(
+        description="Descriptive keywords to describe the dataset",
+        dataverse="pyDaRUS.Citation.keyword.term",
+        default_factory=ListPlus,
+    )
+
+    license: str = Field(default="MIT", description="License for the dataset")
+
     __repo__: Optional[str] = PrivateAttr(
-        default="git://github.com/FAIRChemistry/datamodel_b06.git"
+        default="https://github.com/FAIRChemistry/datamodel_b06.git"
     )
 
     __commit__: Optional[str] = PrivateAttr(
-        default="bb4b1117c1d706a506a972e3d67456fcc85dbc31"
+        default="e2fcf28747c1686bc5dbc48709d307e1ddd7947c"
     )
 
     def add_to_authors(
@@ -69,11 +86,15 @@ class Dataset(sdRDM.DataModel):
         email: str,
         pid: List[PersonalID],
         phone: Optional[int] = None,
+        id: Optional[str] = None,
     ) -> None:
         """
         Adds an instance of 'Author' to the attribute 'authors'.
 
         Args:
+
+
+            id (str): Unique identifier of the 'Author' object. Defaults to 'None'.
 
 
             name (str): Full name of the author.
@@ -90,21 +111,27 @@ class Dataset(sdRDM.DataModel):
 
             phone (Optional[int]): Contact phone number of the author. Defaults to None
         """
-        authors = [
-            Author(
-                name=name, affiliation=affiliation, email=email, pid=pid, phone=phone
-            )
-        ]
+
+        params = {
+            "name": name,
+            "affiliation": affiliation,
+            "email": email,
+            "pid": pid,
+            "phone": phone,
+        }
+        if id is not None:
+            params["id"] = id
+        authors = [Author(**params)]
         self.authors = self.authors + authors
 
     def add_to_samples(
         self,
-        id: str,
         name: str,
         smiles: Optional[str] = None,
         inchi: Optional[str] = None,
         initial_concentration: Optional[float] = None,
         unit: Optional[ConcentrationUnit] = None,
+        id: Optional[str] = None,
     ) -> None:
         """
         Adds an instance of 'Sample' to the attribute 'samples'.
@@ -112,7 +139,7 @@ class Dataset(sdRDM.DataModel):
         Args:
 
 
-            id (str): Unique identifier for the sample, following the EnzymeML convention "s[integer]", e.g. s001.
+            id (str): Unique identifier of the 'Sample' object. Defaults to 'None'.
 
 
             name (str): Descriptive name of the sample.
@@ -129,24 +156,25 @@ class Dataset(sdRDM.DataModel):
 
             unit (Optional[ConcentrationUnit]): Unit of the numerical value used in inital_concentration. Defaults to None
         """
-        samples = [
-            Sample(
-                id=id,
-                name=name,
-                smiles=smiles,
-                inchi=inchi,
-                initial_concentration=initial_concentration,
-                unit=unit,
-            )
-        ]
+
+        params = {
+            "name": name,
+            "smiles": smiles,
+            "inchi": inchi,
+            "initial_concentration": initial_concentration,
+            "unit": unit,
+        }
+        if id is not None:
+            params["id"] = id
+        samples = [Sample(**params)]
         self.samples = self.samples + samples
 
     def add_to_experiments(
         self,
-        id: str,
         name: str,
         experiment_type: Union[Reaction, Analytics],
         details: Optional[str] = None,
+        id: Optional[str] = None,
     ) -> None:
         """
         Adds an instance of 'Experiment' to the attribute 'experiments'.
@@ -154,7 +182,7 @@ class Dataset(sdRDM.DataModel):
         Args:
 
 
-            id (str): Unique identifier for the experiment.
+            id (str): Unique identifier of the 'Experiment' object. Defaults to 'None'.
 
 
             name (str): Descriptive name for the experiment.
@@ -165,9 +193,12 @@ class Dataset(sdRDM.DataModel):
 
             details (Optional[str]): Free form detailed description of the experiment. Defaults to None
         """
-        experiments = [
-            Experiment(
-                id=id, name=name, experiment_type=experiment_type, details=details
-            )
-        ]
-        self.experiments = self.experiments + experiments
+
+        params = {"name": name, "experiment_type": experiment_type, "details": details}
+        if id is not None:
+            params["id"] = id
+        experiments = [Experiment(**params)]
+        self.experiments = self.experiments + experiment
+
+
+s

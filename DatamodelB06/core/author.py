@@ -7,18 +7,11 @@ from pydantic import PrivateAttr
 from pydantic import Field
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
-
 from .personalid import PersonalID
 
 
 class Author(sdRDM.DataModel):
     """Container for information regarding persons who worked on a dataset."""
-
-    name: str = Field(..., description="Full name of the author")
-
-    affiliation: str = Field(
-        ..., description="Organisation the author is affiliated with."
-    )
 
     email: str = Field(..., description="Contact e-mail address of the author")
 
@@ -36,19 +29,34 @@ class Author(sdRDM.DataModel):
         xml="@id",
     )
 
+    name: str = Field(
+        ...,
+        description="Full name of the author",
+        dataverse="pyDaRUS.Citation.author.name",
+    )
+
+    affiliation: str = Field(
+        ...,
+        description="Organisation the author is affiliated with.",
+        dataverse="pyDaRUS.Citation.author.affiliation",
+    )
+
     __repo__: Optional[str] = PrivateAttr(
-        default="git://github.com/FAIRChemistry/datamodel_b06.git"
+        default="https://github.com/FAIRChemistry/datamodel_b06.git"
     )
 
     __commit__: Optional[str] = PrivateAttr(
-        default="bb4b1117c1d706a506a972e3d67456fcc85dbc31"
+        default="e2fcf28747c1686bc5dbc48709d307e1ddd7947c"
     )
 
-    def add_to_pid(self, type: str, identifier: str) -> None:
+    def add_to_pid(self, type: str, identifier: str, id: Optional[str] = None) -> None:
         """
         Adds an instance of 'PersonalID' to the attribute 'pid'.
 
         Args:
+
+
+            id (str): Unique identifier of the 'PersonalID' object. Defaults to 'None'.
 
 
             type (str): Type or scheme of personal identifier.
@@ -56,5 +64,12 @@ class Author(sdRDM.DataModel):
 
             identifier (str): String representation of the personal identifier.
         """
-        pid = [PersonalID(type=type, identifier=identifier)]
-        self.pid = self.pid + pid
+
+        params = {"type": type, "identifier": identifier}
+        if id is not None:
+            params["id"] = id
+        pid = [PersonalID(**params)]
+        self.pid = self.pid + pi
+
+
+d

@@ -27,9 +27,9 @@ class Condition(sdRDM.DataModel):
     )
 
     __repo__: Optional[str] = PrivateAttr(
-        default="git://github.com/FAIRChemistry/datamodel_b06.git"
+        default="https://github.com/FAIRChemistry/datamodel_b06.git"
     )
 
     __commit__: Optional[str] = PrivateAttr(
-        default="4aa69459dec606669cde5b1b942ae648025a1dd4"
+        default="e2fcf28747c1686bc5dbc48709d307e1ddd7947c"
     )

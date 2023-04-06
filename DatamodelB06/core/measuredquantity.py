@@ -9,3 +9,4 @@ class MeasuredQuantity(Enum):
     TIME = "time"
     TEMPERATURE = "temperature"
     CONCENTRATION = "concentration"
+    MOLARITY = "molarity"

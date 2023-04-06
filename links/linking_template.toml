@@ -1,0 +1,48 @@
+__model__ = "Dataset"
+
+[__sources__]
+LibName = "URL to the library"
+
+[Dataset]
+id = "Enter target"
+name = "Enter target"
+date = "Enter target"
+license = "Enter target"
+
+[authors]
+id = "Enter target"
+name = "Enter target"
+affiliation = "Enter target"
+email = "Enter target"
+phone = "Enter target"
+pid = "Enter target"
+
+[samples]
+id = "Enter target"
+name = "Enter target"
+smiles = "Enter target"
+inchi = "Enter target"
+initial_concentration = "Enter target"
+unit = "Enter target"
+
+[experiments]
+id = "Enter target"
+name = "Enter target"
+experiment_type = "Enter target"
+details = "Enter target"
+
+["authors.pid"]
+id = "Enter target"
+type = "Enter target"
+identifier = "Enter target"
+
+["experiments.experiment_type"]
+id = "Enter target"
+name = "Enter target"
+measured_quantity = "Enter target"
+dsv_file_raw = "Enter target"
+dsv_file_results = "Enter target"
+
+["experiments.experiment_type.conditions"]
+id = "Enter target"
+currently_under_construction_come_back_later = "Enter target"
